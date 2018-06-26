@@ -30,17 +30,22 @@
             <div>
                 <h4>Player 1</h4>
 
-                <div class="btn-group" role="group" aria-label="player1-type">
-                    <button type="button" class="btn btn-primary">User</button>
-                    <button type="button" class="btn btn-primary">Bot</button>
+                <div class="dropdown">
+                    <button class="btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" onclick="selectPlayerOneType('User')">User</a>
+                        <a class="dropdown-item" href="#" onclick="selectPlayerOneType('Bot')">Bot</a>
+                    </div>
                 </div>
+
             </div>
 
 
-            <div id="player1-card" class="selection-container btn-group-vertical centering">
-                <button type="button" class="btn btn-dark">Rock</button>
-                <button type="button" class="btn btn-dark">Paper</button>
-                <button type="button" class="btn btn-dark">Scissors</button>
+            <div id="player1-choice" class="selection-container btn-group-vertical centering">
+                <button type="button" class="btn btn-dark" onclick="selectPlayerOneChoice(this)">Rock</button>
+                <button type="button" class="btn btn-dark" onclick="selectPlayerOneChoice(this)">Paper</button>
+                <button type="button" class="btn btn-dark" onclick="selectPlayerOneChoice(this)">Scissors</button>
                 <!--<button type="button" class="btn btn-dark">Lizard</button>-->
                 <!--<button type="button" class="btn btn-dark">Spock</button>-->
             </div>
@@ -50,7 +55,7 @@
         <!-- Center pane -->
         <div class="col-sm-2 centering pt-5">
             <h4>vs</h4>
-            <button id="go-button" type="button" class="btn btn-dark">Go!</button>
+            <button id="go-button" type="button" class="btn btn-dark" onclick="onGoClicked()">Go!</button>
         </div>
 
         <!-- Player 2 pane -->
@@ -59,7 +64,7 @@
                 <h4>Player 2</h4>
 
                 <div class="btn-group" role="group" aria-label="player2-type">
-                    <button type="button" class="btn btn-primary" disabled>Bot</button>
+                    <button type="button" class="btn-sm btn-secondary" disabled>Bot</button>
                 </div>
             </div>
 
@@ -74,9 +79,12 @@
 
 
     <!-- Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
     <!-- JS -->
     <script src="main.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>

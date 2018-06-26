@@ -23,54 +23,41 @@ OTHER DEALINGS IN THE SOFTWARE.
 
     For more information, please refer to <http://unlicense.org> */
 
-// Global variables
-let playerOneType;
-selectPlayerOneType(); // init playerOneType
-let playerOneChoice;
+
+// gameDict is a dictionary of all the possible things that a player can pick
+// in a single game. Each key has a corresponding array of other things that
+// this key beats in a game.
+
+// Rock, Paper, Scissors, Lizard Spock
+const gameDict = {
+    rock: ['scissors', 'lizard'],
+    paper: ['rock', 'spock'],
+    scissors: ['paper', 'lizard'],
+    lizard: ['paper', 'spock'],
+    spock: ['scissors', 'rock'],
+};
+
+const allThings = Object.keys(gameDict);
 
 /**
- * Handler for player 1 type selection.
- * @param type
+ * Returns the status of the game for a given
+ * player and opponent choice.
+ * @param playerChoice
+ * @param opponentChoice
  */
-function selectPlayerOneType(type) {
-    const allowedTypes = ['User', 'Bot'];
-    if(allowedTypes.includes(type)) {
-        playerOneType = type;
+function getResult(playerChoice, opponentChoice) {
+    if(playerChoice == opponentChoice) {
+        return 'draw';
+    } else if(gameDict[playerChoice].includes(opponentChoice)) {
+        return 'win';
     } else {
-        playerOneType = 'User';
+        return 'lose';
     }
-    const button = document.querySelector("#dropdownMenuButton");
-    button.innerHTML = playerOneType;
-}
-
-
-/**
- * Handler for player one choice selection
- * @param choice
- */
-function selectPlayerOneChoice(btn) {
-    playerOneChoice = btn.innerHTML.trim().toLowerCase();
-    console.log(playerOneChoice);
 }
 
 /**
- * Handler for go button
+ * Returns a random thing. Used for bot.
  */
-function onGoClicked(){
-    console.log('inside go');
-
-    const playerTwoChoice = getRandom();
-    console.log('Users choice: ', playerOneChoice);
-    console.log('Bots choice: ', playerTwoChoice);
-    console.log(getResult(playerOneChoice, playerTwoChoice));
-
-    // get the type of player 1
-    // let type;
-    // let buttonGroup = document.querySelectorAll("#player1-type");
-    // for(var i=0; i<buttonGroup.length; i++){
-    //     buttonGroup[i].addEventListener("click", function(){
-    //         type = +this.innerHTML;
-    //     });
-    // }
-
+function getRandom() {
+    return allThings[Math.floor(Math.random()*allThings.length)];
 }
