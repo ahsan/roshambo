@@ -24,11 +24,15 @@ OTHER DEALINGS IN THE SOFTWARE.
     For more information, please refer to <http://unlicense.org> */
 
 
+/*
+    Rock, Paper, Scissors, Lizard, Spock.
+ */
+
+
 // gameDict is a dictionary of all the possible things that a player can pick
 // in a single game. Each key has a corresponding array of other things that
 // this key beats in a game.
-
-// Rock, Paper, Scissors, Lizard Spock
+// This dictionary implements the rules of the game.
 const gameDict = {
     rock: ['scissors', 'lizard'],
     paper: ['rock', 'spock'],
@@ -40,17 +44,25 @@ const gameDict = {
 const allThings = Object.keys(gameDict);
 
 /**
- * Returns the status of the game for a given
+ * Returns the result of the game for a given
  * player and opponent choice.
- * @param playerChoice
- * @param opponentChoice
+ * @param playerThing
+ * @param opponentThing
  */
-function getResult(playerChoice, opponentChoice) {
-    if(playerChoice == opponentChoice) {
+function getResult(playerThing, opponentThing) {
+
+    if(!allThings.includes(playerThing) || !allThings.includes(opponentThing)) {
+        throw new Error('Unknown thing(s).');
+    }
+
+    if(playerThing == opponentThing) {
+        // Game is drawn if the player and opponent choose the same thing
         return 'draw';
-    } else if(gameDict[playerChoice].includes(opponentChoice)) {
+    } else if(gameDict[playerThing].includes(opponentThing)) {
+        // Player wins if playerThing's array includes opponent's thing
         return 'win';
     } else {
+        // Player loses
         return 'lose';
     }
 }
@@ -59,5 +71,6 @@ function getResult(playerChoice, opponentChoice) {
  * Returns a random thing. Used for bot.
  */
 function getRandom() {
+    // Return a random thing from the allThings array
     return allThings[Math.floor(Math.random()*allThings.length)];
 }
