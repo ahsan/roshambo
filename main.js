@@ -64,13 +64,4 @@ function onGoClicked(){
     console.log('Bots choice: ', playerTwoChoice);
     console.log(getResult(playerOneChoice, playerTwoChoice));
 
-    // get the type of player 1
-    // let type;
-    // let buttonGroup = document.querySelectorAll("#player1-type");
-    // for(var i=0; i<buttonGroup.length; i++){
-    //     buttonGroup[i].addEventListener("click", function(){
-    //         type = +this.innerHTML;
-    //     });
-    // }
-
 }

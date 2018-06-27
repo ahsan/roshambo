@@ -1,17 +1,22 @@
-body,html{
+body,html {
     height:100%;
 }
 
-.col-sm-5, .col-sm-2 {
+.centering {
     text-align: center;
 }
 
-.centering {
-    text-align: center!important;
-    margin: auto;
+.card {
+    border: none !important;
 }
+
+
 
 .selection-container {
     /*background-color: red;*/
     height: 250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    align-content: center;
 }
