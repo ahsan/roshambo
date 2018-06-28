@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 
 /*
-    Rock, Paper, Scissors, Lizard, Spock.
+    Rock, Paper, Scissors
  */
 
 

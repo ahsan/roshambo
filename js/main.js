@@ -23,6 +23,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
     For more information, please refer to <http://unlicense.org> */
 
+
+/**
+ * This file has all the controllers for the main view
+ */
+
 // Application state object
 let state = {
     p1Type: "User",         // can be either 'User' or 'Bot'
