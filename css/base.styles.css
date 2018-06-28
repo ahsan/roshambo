@@ -18,25 +18,3 @@ body {
         font-size: 14px;
     }
 }
-
-
-.centering {
-    text-align: center;
-}
-
-.card {
-    border: none !important;
-}
-
-#mid-pane {
-    width: 12rem;
-}
-
-.selection-container {
-    /*background-color: red;*/
-    height: 17rem;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    align-content: center;
-}
