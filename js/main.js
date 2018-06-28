@@ -233,5 +233,3 @@ function setImages(p1Image, p2Image) {
     player1.src = './images/' + p1Image + '.png';
     player2.src = './images/' + p2Image + '.png';
 }
-
-
