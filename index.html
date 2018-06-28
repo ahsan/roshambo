@@ -31,33 +31,49 @@
 
             <!-- Player 1 pane -->
             <div class="card col-xs-5 p-3 centering">
-                <h4>Player 1</h4>
+                <h4><strong>Player 1</strong></h4>
                 <div class="dropdown">
-                    <button class="btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <button id="dropdownMenuButton"
+                            class="btn-sm btn-secondary dropdown-toggle"
+                            type="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                    ></button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" onclick="selectPlayerOneType('User')">User</a>
-                        <a class="dropdown-item" href="#" onclick="selectPlayerOneType('Bot')">Bot</a>
+                        <a class="dropdown-item" href="#" onclick="selectP1Type('User')">User</a>
+                        <a class="dropdown-item" href="#" onclick="selectP1Type('Bot')">Bot</a>
                     </div>
                 </div>
 
 
-                <div id="player1-choice" class="card selection-container btn-group-vertical">
-                    <button type="button" class="btn-primary btn" onclick="selectPlayerOneChoice(this)">Rock</button>
-                    <button type="button" class="btn-primary btn" onclick="selectPlayerOneChoice(this)">Paper</button>
-                    <button type="button" class="btn-primary btn" onclick="selectPlayerOneChoice(this)">Scissors</button>
-                    <button type="button" class="btn-primary btn" onclick="selectPlayerOneChoice(this)">Lizard</button>
-                    <button type="button" class="btn-primary btn" onclick="selectPlayerOneChoice(this)">Spock</button>
+                <div id="player1-btns" class="card selection-container btn-group-vertical" >
+                    <button type="button" class="btn-dark btn" onclick="selectP1Choice(this)">Rock</button>
+                    <button type="button" class="btn-dark btn" onclick="selectP1Choice(this)">Paper</button>
+                    <button type="button" class="btn-dark btn" onclick="selectP1Choice(this)">Scissors</button>
+                    <button type="button" class="btn-dark btn" onclick="selectP1Choice(this)">Lizard</button>
+                    <button type="button" class="btn-dark btn" onclick="selectP1Choice(this)">Spock</button>
                 </div>
+
+                <div id="player1-img-div" class="selection-container" >
+                    <img id="player1-img" src="./images/rock.png" alt="" style="max-width:5.5rem;">
+                </div>
+
+                <div id="player1-qmark" class="selection-container" style="display: none">
+                    <h1>?</h1>
+                </div>
+
 
             </div>
 
 
 
             <!-- Center pane -->
-            <div class="card col-xs-2 centering align-self-center p-3">
-                <h2 id="score">0 - 0</h2>
-                <h4 class="mt-3">vs</h4>
-                <button id="go-button" type="button" class="btn btn-dark" onclick="onGoClicked()">Go!</button>
+            <div id="mid-pane" class="card col-xs-2 centering align-self-center p-3">
+                <h2 id="score"></h2>
+                <h5 id="message"></h5>
+                <!--<h4 class="mt-3">vs</h4>-->
+                <button id="go-button" type="button" class="btn btn-dark mt-5" onclick="onGoClicked(this)">Go!</button>
             </div>
 
 
@@ -65,14 +81,18 @@
             <!-- Player 2 pane -->
             <div class="card col-xs-5 p-3 centering">
                 <div>
-                    <h4>Player 2</h4>
+                    <h4><strong>Player 2</strong></h4>
 
                     <div class="btn-group" role="group" aria-label="player2-type">
                         <button type="button" class="btn-sm btn-secondary" disabled>Bot</button>
                     </div>
                 </div>
 
-                <div class="selection-container">
+                <div id="player2-img-div" class="selection-container" style="display: none;">
+                    <img id="player2-img" src="./images/rock.png" alt="" style="max-width:5rem;">
+                </div>
+
+                <div id="player2-qmark" class="selection-container">
                     <h1>?</h1>
                 </div>
             </div>
@@ -80,11 +100,6 @@
         </div>
 
     </div>
-
-
-
-
-
 
 
     <!-- Bootstrap -->

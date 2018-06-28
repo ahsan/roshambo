@@ -23,24 +23,67 @@ OTHER DEALINGS IN THE SOFTWARE.
 
     For more information, please refer to <http://unlicense.org> */
 
-// Global variables
-let playerOneType;
-selectPlayerOneType(); // init playerOneType
-let playerOneChoice;
+// Application state object
+let state = {
+    p1Type: "User",         // can be either 'User' or 'Bot'
+    p1Choice: null,         // player 1's choice of object
+    gameComplete: false,    // represents if the game is done or ongoing
+    p1Score: 0,             // player 1's score up till now
+    p2Score: 0              // player 2's score up till now
+};
+
+// init a game
+resetGame();
+
+/**
+ * Resets the state of the application for a new game.
+ * Scores are preserved.
+ */
+function resetGame() {
+    // update game status
+    state.gameComplete = false;
+    state.p1Choice = null;
+
+    // set the message strings
+    setMessage("");
+    setScoreString();
+
+    // init player 1's pane, preserving the type of player 1
+    selectP1Type(state.p1Type); // toggles divs as well
+
+    // init player 2's pane to show question mark
+    toggleP2Divs('qmark');
+}
+
 
 /**
  * Handler for player 1 type selection.
  * @param type
  */
-function selectPlayerOneType(type) {
+function selectP1Type(type) {
+
+    // force to legal user types
     const allowedTypes = ['User', 'Bot'];
     if(allowedTypes.includes(type)) {
-        playerOneType = type;
+        state.p1Type = type;
     } else {
-        playerOneType = 'User';
+        state.p1Type = 'User';
     }
+
+    // show type on the dropdown menu
     const button = document.querySelector("#dropdownMenuButton");
-    button.innerHTML = playerOneType;
+    button.innerHTML = state.p1Type;
+
+    // based on type, either show buttons (user)
+    // or question mark (bot)
+    switch (state.p1Type) {
+        case 'User':
+            toggleP1Divs('buttons');
+            break;
+        case 'Bot':
+            toggleP1Divs('qmark');
+            break;
+    }
 }
 
 
@@ -48,20 +91,147 @@ function selectPlayerOneType(type) {
  * Handler for player one choice selection
  * @param choice
  */
-function selectPlayerOneChoice(btn) {
-    playerOneChoice = btn.innerHTML.trim().toLowerCase();
-    console.log(playerOneChoice);
+function selectP1Choice(btn) {
+    switch (state.p1Type) {
+        case 'User':
+            state.p1Choice = btn.innerHTML.trim().toLowerCase();
+            break;
+        case 'Bot':
+            state.p1Choice = getRandom();
+            break;
+    }
 }
 
 /**
- * Handler for go button
+ * Handler for go/new game button
  */
-function onGoClicked(){
-    console.log('inside go');
+function onGoClicked(btn){
 
-    const playerTwoChoice = getRandom();
-    console.log('Users choice: ', playerOneChoice);
-    console.log('Bots choice: ', playerTwoChoice);
-    console.log(getResult(playerOneChoice, playerTwoChoice));
+    if(state.gameComplete) {
+        // 'new game' button was clicked
+        resetGame();
+        // change to 'go' button
+        btn.innerHTML = 'Go!';
+        state.gameComplete = false;
+    } else {
+        // 'go' button was clicked
+        if(state.p1Type === 'Bot') {
+            state.p1Choice = getRandom();
+        } else {
+            // p1Type is user
+            if(!state.p1Choice) {
+                setMessage("Select an object")
+                return;
+            }
+        }
+        const playerTwoChoice = getRandom();
 
+        let gameResult = getResult(state.p1Choice, playerTwoChoice);
+
+        if (gameResult == 'win') {
+            // player 1 has won
+            state.p1Score++;
+            setMessage("Player 1 won!");
+        } else if (gameResult == 'lose') {
+            // player 2 has won
+            state.p2Score++;
+            setMessage("Player 1 lost!");
+        } else {
+            // draw
+            setMessage("The game drawed");
+        }
+
+        setScoreString();
+
+        // show images on both panes
+        toggleP1Divs('image');
+        toggleP2Divs('image');
+        setImages(state.p1Choice, playerTwoChoice);
+
+        // change to 'New Game' button
+        btn.innerHTML = 'New Game';
+        state.gameComplete = true;
+    }
 }
+
+/**
+ * Sets the message string
+ * @param message
+ */
+function setMessage(message) {
+    const messageElem = document.querySelector("#message");
+    messageElem.innerHTML = message;
+}
+
+/**
+ * Sets the score string
+ * @param message
+ */
+function setScoreString() {
+    const messageElem = document.querySelector("#score");
+    messageElem.innerHTML = state.p1Score + " - " + state.p2Score;
+}
+
+/**
+ * Toggles the correct div to show on the player 1's pane
+ * @param toShow: 'buttons' or 'image' or 'qmark'
+ */
+function toggleP1Divs(toShow) {
+
+    const btnsDiv = document.querySelector("#player1-btns");
+    const imageDiv = document.querySelector("#player1-img-div");
+    const qMarkDiv = document.querySelector("#player1-qmark");
+
+    switch (toShow) {
+        case 'buttons':
+            btnsDiv.style.display = 'flex';
+            imageDiv.style.display = 'none';
+            qMarkDiv.style.display = 'none';
+            break;
+        case 'image':
+            btnsDiv.style.display = 'none';
+            imageDiv.style.display = 'flex';
+            qMarkDiv.style.display = 'none';
+            break;
+        case 'qmark':
+            btnsDiv.style.display = 'none';
+            imageDiv.style.display = 'none';
+            qMarkDiv.style.display = 'flex';
+            break;
+    }
+}
+
+/**
+ * Toggles the correct div to show on the player 2's pane
+ * @param toShow: 'image' or 'qmark'
+ */
+function toggleP2Divs(toShow) {
+
+    const imageDiv = document.querySelector("#player2-img-div");
+    const qMarkDiv = document.querySelector("#player2-qmark");
+
+    switch (toShow) {
+        case 'image':
+            imageDiv.style.display = 'flex';
+            qMarkDiv.style.display = 'none';
+            break;
+        case 'qmark':
+            imageDiv.style.display = 'none';
+            qMarkDiv.style.display = 'flex';
+            break;
+    }
+}
+
+
+/**
+ * Sets the image src of the image divs
+ * @param image
+ */
+function setImages(p1Image, p2Image) {
+    const player1 = document.querySelector("#player1-img");
+    const player2 = document.querySelector("#player2-img");
+    player1.src = './images/' + p1Image + '.png';
+    player2.src = './images/' + p2Image + '.png';
+}
+
+
