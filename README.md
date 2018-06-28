@@ -33,8 +33,8 @@ http://127.0.0.1:8080/tests
 ```
 
 # Description
-A simple vanilla JS application that lets you play Rock-Paper-Scissors! (RPSLS).
-The app uses Bootstrap for its layout and different components. All other functions and events are handled by vanilla JS. The `game.js` module implements <i>RPSLS</i> logic.
+A simple vanilla JS application that lets you play Rock-Paper-Scissors! (RPS).
+The app uses Bootstrap for its layout and different components. All other functions and events are handled by vanilla JS. The `game.js` module implements <i>RPS</i> logic.
 
 ## Features
 - Play in User vs Bot mode
