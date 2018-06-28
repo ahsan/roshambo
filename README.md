@@ -18,8 +18,9 @@ git clone https://github.com/ahsan/roshambo.git
 ```
 npm install http-server -g
 ```
-3. Serve the application
+3. Serve the application from the root of the project:
 ```
+cd ./roshambo/
 http-server --host=127.0.0.1
 ```
 4. Open the following url in your browser
