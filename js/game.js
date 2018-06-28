@@ -33,6 +33,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 // in a single game. Each key has a corresponding array of other things that
 // this key beats in a game.
 // This dictionary implements the rules of the game.
+const gameDict = {
+    rock: ['scissors'],
+    paper: ['rock'],
+    scissors: ['paper']
+};
+
+// A simple addition in the gameDict easily extends the game to include Lizard and Spock
 // const gameDict = {
 //     rock: ['scissors', 'lizard'],
 //     paper: ['rock', 'spock'],
@@ -40,13 +47,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 //     lizard: ['paper', 'spock'],
 //     spock: ['scissors', 'rock'],
 // };
-
-// Without Lizard and Spock
-const gameDict = {
-    rock: ['scissors'],
-    paper: ['rock'],
-    scissors: ['paper'],
-};
 
 const allThings = Object.keys(gameDict);
 

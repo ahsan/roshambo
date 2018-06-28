@@ -1,9 +1,9 @@
 <div align="center">
     <div>
-        <img src="./images/spock.png" alt="Roshambo" width="100">
+        <img src="./images/scissors.png" alt="Roshambo" width="100">
     </div>
    <div>
-        <strong>Rock, Paper, Scissors, Lizard, Spock!</strong>
+        <strong>Rock, Paper, Scissors!</strong>
     </div>
 </div>
 
@@ -24,14 +24,21 @@ http-server ./index.html
 ```
 
 # Description
-A simple vanilla JS application that lets you play Rock-Paper-Scissors-Lizard-Spock! (RPSLS).
+A simple vanilla JS application that lets you play Rock-Paper-Scissors! (RPSLS).
 The app uses Bootstrap for its layout and different components. All other functions and events are handled by vanilla JS. The `game.js` module implements <i>RPSLS</i> logic.
 
 ## Features
 - Play User vs Bot
 - Play Bot vs Bot
 - Keep score for all the games played
+- The game can be easily extended to include Lizard and Spock by toggling comments on a few lines of code: `line 56-57 in (index.html)` , `line 43-49 and line 36-40 (game.js)`.
 
+## Browser support
+The application has been tested on the following browsers. Intended responsiveness is till 480px screen width.
+- Chrome (desktop, mobile)
+- Safari (desktop, mobile)
+
+The target browser is Chrome v67.0 (mobile and desktop).
 
 ## Folder Structure
 ```
