@@ -20,7 +20,16 @@ npm install http-server -g
 ```
 3. Serve the application
 ```
-http-server ./index.html
+http-server --host=127.0.0.1
+```
+4. Open the following url in your browser
+```
+http://127.0.0.1:8080/
+```
+# Running the unit tests
+The unit tests for this application are written using Mocha.js and Expect.js. They run in the browser. In order to run the unit tests and see the report, visit this url:
+```
+http://127.0.0.1:8080/tests
 ```
 
 # Description
@@ -28,8 +37,8 @@ A simple vanilla JS application that lets you play Rock-Paper-Scissors! (RPSLS).
 The app uses Bootstrap for its layout and different components. All other functions and events are handled by vanilla JS. The `game.js` module implements <i>RPSLS</i> logic.
 
 ## Features
-- Play User vs Bot
-- Play Bot vs Bot
+- Play in User vs Bot mode
+- Play in Bot vs Bot mode
 - Keep score for all the games played
 - The game can be easily extended to include Lizard and Spock by toggling comments on a few lines of code: `line 56-57 in (index.html)` , `line 43-49 and line 36-40 (game.js)`.
 
